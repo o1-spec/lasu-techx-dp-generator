@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     template: '%s | LASU TECH X 5.0',
   },
   description:
-    'LASU TECH X 5.0 is the flagship student technology conference at Lagos State University. Explore keynotes, workshops, and industry connections in one bold, high-impact event.',
+    'Official DP Generator for LASU TECH X 5.0. Create and download your branded event profile picture in seconds.',
   keywords: [
     'LASU TECH X',
     'LASU TECH X 5.0',
@@ -136,7 +136,7 @@ export default function RootLayout({
           </div>
         </header>
 
-        <main className="pt-16s sm:pt-20">
+        <main className="pt-0">
           {children}
         </main>
 
