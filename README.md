@@ -2,7 +2,7 @@
 
 The official profile picture generator for **LASU TECH X 5.0**. Show your support and tell the world you're attending the flagship student technology conference at Lagos State University.
 
-![LASU TECH X 5.0](public/images/Hero_Bg.jpg)
+![LASU TECH X 5.0](public/image-generator.png)
 
 ## 🚀 Features
 
