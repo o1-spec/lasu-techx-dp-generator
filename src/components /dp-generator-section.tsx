@@ -14,6 +14,13 @@ import { AnimateIn } from './ui/animate-in'
 
 const CANVAS_SIZE = 1080
 
+const PHOTO_BOX = {
+    x: 326,
+    y: 352,
+    width: 428,
+    height: 428,
+}
+
 function loadImg(src: string): Promise<HTMLImageElement> {
     return new Promise((resolve, reject) => {
         const img = new Image()
@@ -78,16 +85,44 @@ export function DPGeneratorSection() {
         const ctx = canvas.getContext('2d')
         if (!ctx) return
 
+        // Clear canvas and fill with background
         ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE)
         ctx.fillStyle = '#050505'
         ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE)
 
-        if (userImage) {
-            ctx.drawImage(userImage, position.x, position.y, userImage.width * scale, userImage.height * scale)
+        // Draw user image clipped to photo box
+        if (userImage && userImage.complete && userImage.naturalHeight > 0) {
+            try {
+                ctx.save()
+                ctx.beginPath()
+                // Use roundRect if available, fallback to rect
+                if (typeof ctx.roundRect === 'function') {
+                    ctx.roundRect(PHOTO_BOX.x, PHOTO_BOX.y, PHOTO_BOX.width, PHOTO_BOX.height, 22)
+                } else {
+                    ctx.rect(PHOTO_BOX.x, PHOTO_BOX.y, PHOTO_BOX.width, PHOTO_BOX.height)
+                }
+                ctx.clip()
+                
+                // Draw the image with position offset applied within the clipped area
+                ctx.drawImage(
+                    userImage,
+                    PHOTO_BOX.x + position.x,
+                    PHOTO_BOX.y + position.y,
+                    userImage.width * scale,
+                    userImage.height * scale
+                )
+                ctx.restore()
+            } catch (error) {
+                console.error('Error drawing user image:', error)
+            }
         }
 
-        if (frameImage && !frameError) {
-            ctx.drawImage(frameImage, 0, 0, CANVAS_SIZE, CANVAS_SIZE)
+        if (frameImage && !frameError && frameImage.complete && frameImage.naturalHeight > 0) {
+            try {
+                ctx.drawImage(frameImage, 0, 0, CANVAS_SIZE, CANVAS_SIZE)
+            } catch (error) {
+                console.error('Error drawing frame image:', error)
+            }
         } else if (frameError) {
             ctx.save()
             ctx.globalAlpha = 0.18
@@ -126,13 +161,21 @@ export function DPGeneratorSection() {
             loadImg(ev.target?.result as string).then((img) => {
                 setUserImage(img)
                 setDownloaded(false)
-                const s = Math.max(CANVAS_SIZE / img.width, CANVAS_SIZE / img.height)
-                const ix = (CANVAS_SIZE - img.width * s) / 2
-                const iy = (CANVAS_SIZE - img.height * s) / 2
+                // Scale to FIT inside the photo box (not fill - use Math.min instead of Math.max)
+                // This ensures the image is smaller than or equal to the box dimensions
+                const s = Math.min(PHOTO_BOX.width / img.width, PHOTO_BOX.height / img.height)
+                // Center the image in the box
+                const scaledWidth = img.width * s
+                const scaledHeight = img.height * s
+                const ix = (PHOTO_BOX.width - scaledWidth) / 2
+                const iy = (PHOTO_BOX.height - scaledHeight) / 2
                 setScale(s)
                 setPosition({ x: ix, y: iy })
                 setDefaultScale(s)
                 setDefaultPos({ x: ix, y: iy })
+            }).catch((err) => {
+                console.error('Failed to load image:', err)
+                alert('Failed to load image')
             })
         }
         reader.readAsDataURL(file)
