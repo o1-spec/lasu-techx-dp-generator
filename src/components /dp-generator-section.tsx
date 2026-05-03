@@ -16,7 +16,7 @@ const CANVAS_SIZE = 1080
 
 const PHOTO_BOX = {
     x: 326,
-    y: 352,
+    y: 332,
     width: 428,
     height: 428,
 }
@@ -87,8 +87,8 @@ export function DPGeneratorSection() {
 
         // Clear canvas and fill with background
         ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE)
-        ctx.fillStyle = '#050505'
-        ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE)
+        // ctx.fillStyle = '#050505'
+        // ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE)
 
         // Draw user image clipped to photo box
         if (userImage && userImage.complete && userImage.naturalHeight > 0) {
@@ -306,8 +306,8 @@ export function DPGeneratorSection() {
                                                 <ImageIcon className="h-6 w-6 text-primary" />
                                             </div>
                                             <div className="text-center">
-                                                <p className="text-sm font-semibold text-foreground/70">Click to upload your photo</p>
-                                                <p className="mt-1 text-xs text-muted-foreground">JPEG · PNG · WebP · up to 20 MB</p>
+                                                <p className="text-[12px] font-semibold text-foreground/70">Click to upload your photo</p>
+                                                <p className="mt-1 text-[10px] text-muted-foreground">JPEG · PNG · WebP · up to 20 MB</p>
                                             </div>
                                         </label>
                                     )}
