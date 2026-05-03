@@ -74,7 +74,7 @@ export function DPGeneratorSection() {
     const step = !userImage ? 1 : downloaded ? 3 : 2
 
     useEffect(() => {
-        loadImg('/frame.png')
+        loadImg('/frame-2.png')
             .then(setFrameImage)
             .catch(() => setFrameError(true))
     }, [])
@@ -138,7 +138,7 @@ export function DPGeneratorSection() {
             ctx.fillText('LASU TECH X 5.0', CANVAS_SIZE / 2, CANVAS_SIZE - 130)
             ctx.fillStyle = 'rgba(255,249,236,0.5)'
             ctx.font = '28px system-ui'
-            ctx.fillText('Add frame.png to /public to continue', CANVAS_SIZE / 2, CANVAS_SIZE - 80)
+            ctx.fillText('Add g to /public to continue', CANVAS_SIZE / 2, CANVAS_SIZE - 80)
             ctx.restore()
         }
     }, [userImage, frameImage, frameError, scale, position])
