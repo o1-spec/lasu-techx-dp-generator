@@ -306,7 +306,7 @@ export function DPGeneratorSection() {
                                         boxShadow: userImage ? '0 0 36px rgba(255,179,0,0.10)' : 'none',
                                         transition: 'border-color 0.3s, box-shadow 0.4s',
                                         cursor: isDragging ? 'grabbing' : userImage ? 'grab' : 'default',
-                                        touchAction: 'none',
+                                        touchAction: isDragging ? 'none' : 'auto',
                                     }}
                                 >
                                     {!userImage && (
@@ -321,8 +321,8 @@ export function DPGeneratorSection() {
                                                 <ImageIcon className="h-6 w-6 text-primary" />
                                             </div>
                                             <div className="text-center">
-                                                <p className="text-[12px] font-semibold text-foreground/70">Click to upload your photo</p>
-                                                <p className="mt-1 text-[10px] text-muted-foreground">JPEG · PNG · WebP · up to 20 MB</p>
+                                                <p className="text-[10px] font-semibold text-foreground/70">Click to upload your photo</p>
+                                                <p className="mt-1 text-[8px] text-muted-foreground">JPEG · PNG · WebP · up to 20 MB</p>
                                             </div>
                                         </label>
                                     )}
