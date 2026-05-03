@@ -65,6 +65,8 @@ export function DPGeneratorSection() {
     const [defaultScale, setDefaultScale] = useState(1)
     const [defaultPos, setDefaultPos] = useState({ x: 0, y: 0 })
 
+    const [userName, setUserName] = useState('')
+
     const [isDragging, setIsDragging] = useState(false)
     const [dragStart, setDragStart] = useState({ x: 0, y: 0 })
 
@@ -141,7 +143,20 @@ export function DPGeneratorSection() {
             ctx.fillText('Add g to /public to continue', CANVAS_SIZE / 2, CANVAS_SIZE - 80)
             ctx.restore()
         }
-    }, [userImage, frameImage, frameError, scale, position])
+
+        if (userName.trim()) {
+            try {
+                ctx.save()
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.9)'
+                ctx.font = 'bold 32px system-ui'
+                ctx.textAlign = 'center'
+                ctx.fillText(userName.toUpperCase(), CANVAS_SIZE / 2, PHOTO_BOX.y + PHOTO_BOX.height + 50)
+                ctx.restore()
+            } catch (error) {
+                console.error('Error drawing user name:', error)
+            }
+        }
+    }, [userImage, frameImage, frameError, scale, position, userName])
 
     useEffect(() => { draw() }, [draw])
 
@@ -400,6 +415,24 @@ export function DPGeneratorSection() {
                                             />
                                             <ZoomIn className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
                                         </div>
+                                    </div>
+
+                                    <div className="mb-5">
+                                        <label htmlFor="user-name-input" className="mb-2 flex text-xs font-medium text-muted-foreground">
+                                            Your Name
+                                        </label>
+                                        <input
+                                            id="user-name-input"
+                                            type="text"
+                                            placeholder="Enter your name"
+                                            value={userName}
+                                            onChange={(e) => setUserName(e.target.value)}
+                                            maxLength={30}
+                                            className="w-full rounded-lg border border-border bg-muted/30 px-3 py-2 text-sm font-medium text-foreground placeholder-muted-foreground transition-all hover:border-primary/40 hover:bg-primary/5 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/50"
+                                        />
+                                        <p className="mt-1 text-[10px] text-muted-foreground">
+                                            {userName.length}/30 characters
+                                        </p>
                                     </div>
 
                                     <button
