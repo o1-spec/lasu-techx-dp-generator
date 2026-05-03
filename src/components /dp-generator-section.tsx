@@ -315,14 +315,14 @@ export function DPGeneratorSection() {
                                             className="absolute inset-0 z-10 flex cursor-pointer flex-col items-center justify-center gap-3"
                                         >
                                             <div
-                                                className="flex h-14 w-14 items-center justify-center rounded-2xl"
+                                                className="flex h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 items-center justify-center rounded-2xl"
                                                 style={{ background: 'rgba(255,179,0,0.12)', border: '1px solid rgba(255,179,0,0.25)' }}
                                             >
                                                 <ImageIcon className="h-6 w-6 text-primary" />
                                             </div>
                                             <div className="text-center">
-                                                <p className="text-[10px] font-semibold text-foreground/70">Click to upload your photo</p>
-                                                <p className="mt-1 text-[8px] text-muted-foreground">JPEG · PNG · WebP · up to 20 MB</p>
+                                                <p className="text-[8px] sm:text-[10px] font-semibold text-foreground/70">Click to upload your photo</p>
+                                                <p className="mt-1 text-[6px] sm:text-[8px] text-muted-foreground">JPEG · PNG · WebP · up to 20 MB</p>
                                             </div>
                                         </label>
                                     )}
