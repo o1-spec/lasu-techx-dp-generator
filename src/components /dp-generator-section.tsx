@@ -150,7 +150,7 @@ export function DPGeneratorSection() {
                 ctx.fillStyle = 'rgba(255, 255, 255, 0.9)'
                 ctx.font = 'bold 32px system-ui'
                 ctx.textAlign = 'center'
-                ctx.fillText(userName.toUpperCase(), CANVAS_SIZE / 2, PHOTO_BOX.y + PHOTO_BOX.height + 50)
+                ctx.fillText(userName.toUpperCase(), CANVAS_SIZE / 2, PHOTO_BOX.y + PHOTO_BOX.height + 35)
                 ctx.restore()
             } catch (error) {
                 console.error('Error drawing user name:', error)
