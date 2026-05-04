@@ -210,20 +210,13 @@ export function DPGeneratorSection() {
             : { cx: e.clientX, cy: e.clientY }
 
     const onPointerDown = (e: ReactMouseEvent<HTMLCanvasElement> | ReactTouchEvent<HTMLCanvasElement>) => {
-        if (!userImage) return
-        if ('touches' in e && e.cancelable) e.preventDefault()
-        setIsDragging(true)
-        const { cx, cy } = getXY(e)
-        const { rx, ry } = getRatio()
-        setDragStart({ x: cx * rx - position.x, y: cy * ry - position.y })
+        // Dragging disabled - users can only zoom with slider
+        return
     }
 
     const onPointerMove = (e: ReactMouseEvent<HTMLCanvasElement> | ReactTouchEvent<HTMLCanvasElement>) => {
-        if (!isDragging || !userImage) return
-        if ('touches' in e && e.cancelable) e.preventDefault()
-        const { cx, cy } = getXY(e)
-        const { rx, ry } = getRatio()
-        setPosition({ x: cx * rx - dragStart.x, y: cy * ry - dragStart.y })
+        // Dragging disabled - users can only zoom with slider
+        return
     }
 
     const onPointerUp = () => setIsDragging(false)
@@ -305,8 +298,8 @@ export function DPGeneratorSection() {
                                             : '1.5px dashed rgba(255,255,255,0.10)',
                                         boxShadow: userImage ? '0 0 36px rgba(255,179,0,0.10)' : 'none',
                                         transition: 'border-color 0.3s, box-shadow 0.4s',
-                                        cursor: isDragging ? 'grabbing' : userImage ? 'grab' : 'default',
-                                        touchAction: isDragging ? 'none' : 'auto',
+                                        cursor: 'default',
+                                        touchAction: 'auto',
                                     }}
                                 >
                                     {!userImage && (
