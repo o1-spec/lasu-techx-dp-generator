@@ -339,8 +339,8 @@ export function DPGeneratorSection() {
 
                                 {userImage && (
                                     <p className="mt-3 text-center text-[11px] font-medium tracking-wide text-muted-foreground">
-                                        <span className="sm:hidden">Tap &amp; drag to reposition · Use slider to zoom</span>
-                                        <span className="hidden sm:inline">Drag to reposition · Scroll or use slider to zoom</span>
+                                        <span className="sm:hidden">Use slider to zoom</span>
+                                        <span className="hidden sm:inline">Use slider to zoom</span>
                                     </p>
                                 )}
                             </div>
