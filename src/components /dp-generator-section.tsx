@@ -176,9 +176,9 @@ export function DPGeneratorSection() {
             loadImg(ev.target?.result as string).then((img) => {
                 setUserImage(img)
                 setDownloaded(false)
-                // Scale to FIT inside the photo box (not fill - use Math.min instead of Math.max)
-                // This ensures the image is smaller than or equal to the box dimensions
-                const s = Math.min(PHOTO_BOX.width / img.width, PHOTO_BOX.height / img.height)
+                // Scale to FILL the photo box - use Math.max to ensure image fills the space
+                // User can then zoom out if they want to see the full image
+                const s = Math.max(PHOTO_BOX.width / img.width, PHOTO_BOX.height / img.height)
                 // Center the image in the box
                 const scaledWidth = img.width * s
                 const scaledHeight = img.height * s
