@@ -76,7 +76,7 @@ export function DPGeneratorSection() {
     const step = !userImage ? 1 : downloaded ? 3 : 2
 
     useEffect(() => {
-        loadImg('/frame-2.png')
+        loadImg('/frame-3.png')
             .then(setFrameImage)
             .catch(() => setFrameError(true))
     }, [])
